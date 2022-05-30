@@ -7,26 +7,12 @@ export class SchedulerController {
     constructor(private readonly schedulerService: SchedulerService) { }
 
     @Post('create')
-    createScheduler(@Body() scheduler: Scheduler): Promise<any> {
-        return this.schedulerService
-            .createScheduler(scheduler)
-            .then((scheduler) => {
-                return scheduler;
-            })
-            .catch((error) => {
-                return { error };
-            });
+    createScheduler(@Body() scheduler: Scheduler): Promise<Scheduler> {
+        return this.schedulerService.createScheduler(scheduler);
     }
 
     @Get('list')
-    getSchedulers(@Query() dateStart?: string, @Query() dateEnd?: string): Promise<any> {
-        return this.schedulerService
-            .getSchedulers(dateStart, dateEnd)
-            .then((schedulers) => {
-                return schedulers;
-            })
-            .catch((error) => {
-                return { error };
-            });
+    getSchedulers(@Query() dateStart?: string, @Query() dateEnd?: string): Promise<Scheduler[]> {
+        return this.schedulerService.getSchedulers(dateStart, dateEnd);
     }
 }

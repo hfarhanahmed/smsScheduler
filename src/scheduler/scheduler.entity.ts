@@ -3,6 +3,7 @@ import {
 	PrimaryGeneratedColumn,
 	Column,
 	ManyToMany,
+	JoinColumn,
 	JoinTable,
 } from 'typeorm';
 
@@ -21,7 +22,7 @@ export class Scheduler {
 	@Column('datetime')
 	public executionTime: Date;
 
-	@ManyToMany(() => Recipient)
+	@ManyToMany((type) => Recipient, (recipient) => recipient.schedulers, { cascade: ['insert', 'update'] })
 	@JoinTable()
 	public recipients: Recipient[];
 }

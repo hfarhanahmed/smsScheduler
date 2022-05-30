@@ -13,7 +13,7 @@ export class SchedulerService {
     ) { }
 
     public createScheduler = async (scheduler: Scheduler): Promise<Scheduler> => {
-        return await this.schedulerRepository.save(scheduler);
+        return await this.schedulerRepository.save(this.schedulerRepository.create(scheduler));
     };
 
     public getSchedulers = async (
@@ -23,22 +23,27 @@ export class SchedulerService {
         if (dateStart.length > 0 && dateEnd.length > 0) {
             return await this.schedulerRepository.find({
                 where: { executionTime: Between(dateStart, dateEnd) },
+                relations: ['recipients']
             });
         } else if (dateStart.length > 0) {
             return await this.schedulerRepository.find({
                 where: { executionTime: MoreThan(dateStart) },
+                relations: ['recipients']
             });
         } else if (dateEnd.length > 0) {
             return await this.schedulerRepository.find({
                 where: { executionTime: LessThan(dateEnd) },
+                relations: ['recipients']
             });
         } else {
-            return await this.schedulerRepository.find();
+            return await this.schedulerRepository.find({
+                relations: ['recipients']
+            });
         }
     };
 
     // @Cron('0 */30 8-18 * * *')
     // private updateSmsResponse() {
-    // 	// const getSmsResponse = this.proxyService.getSmsStatus();
+    //     // const getSmsResponse = this.proxyService.getSmsStatus();
     // }
 }
