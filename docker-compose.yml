@@ -10,6 +10,7 @@ services:
       - MYSQL_USER=user
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=forestInteractive
+      - BASE_URL=http://kr8tif.lawaapp.com:1338
     build:
       context: .
       dockerfile: ./Dockerfile

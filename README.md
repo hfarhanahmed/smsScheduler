@@ -1,3 +1,21 @@
+# Project Details
+
+This project is to build an sms scheduler based on Docker, Nestjs and TypeOrm using mysql database.
+
+## Project compilation
+
+- You should have nest cli and docker installed in you computer.
+
+To run the project along with the database you can use the docket image.
+
+- Use 'docker-compose build' to build the docker image
+- Use 'docker-compose up' to run the project in docker image.
+
+if you only want to the nest project, you can use nest command see the document below.
+You also have to update the environment files because they are based on docker instance.
+
+# Nest Details
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
