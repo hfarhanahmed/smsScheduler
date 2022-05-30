@@ -9,8 +9,11 @@ import { getMetadataArgsStorage } from 'typeorm';
 import { SchedulerController } from './scheduler/scheduler.controller';
 import { SchedulerService } from './scheduler/scheduler.service';
 import { Scheduler } from './scheduler/scheduler.entity';
-import { SentSms } from './scheduler/sent-sms.entity';
+import { SentSms } from './sent-sms/sent-sms.entity';
 import { Recipient } from './scheduler/recipient.entity';
+import { HttpModule } from '@nestjs/axios';
+import { SentSmsModule } from './sent-sms/sent-sms.module';
+import { SentSmsService } from './sent-sms/sent-sms.service';
 
 const ENTITIES = [Scheduler, SentSms, Recipient];
 
@@ -21,13 +24,15 @@ const MODULES = [
       ({ target }: TableMetadataArgs) => target,
     ),
   }),
+  SentSmsModule,
   SchedulerModule,
   TypeOrmModule.forFeature(ENTITIES),
+  HttpModule
 ];
 
 @Module({
   imports: MODULES,
   controllers: [AppController, SchedulerController],
-  providers: [AppService, SchedulerService],
+  providers: [AppService, SchedulerService, SentSmsService],
 })
 export class AppModule { }

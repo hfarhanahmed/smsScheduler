@@ -13,6 +13,6 @@ export class SchedulerController {
 
     @Get('list')
     getSchedulers(@Query() dateStart?: string, @Query() dateEnd?: string): Promise<Scheduler[]> {
-        return this.schedulerService.getSchedulers(dateStart, dateEnd);
+        return this.schedulerService.getSchedulers(new Date(dateStart), new Date(dateEnd));
     }
 }
